@@ -1,5 +1,6 @@
-package com.komaruStream.StreamByKomaru;
+package com.komaruStream.StreamByKomaru.service;
 
+import com.komaruStream.StreamByKomaru.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,28 +29,28 @@ public class EmployeeService {
         return employees;
     }
 
-    public static OptionalInt findEmployeeWithMaxSalaryFromDepartment(int dep) {
+    public OptionalInt findEmployeeWithMaxSalaryFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
                 .mapToInt(Employee::getSalary)
                 .max();
     }
 
-    public static OptionalInt findEmployeeWithMinSalaryFromDepartment(int dep) {
+    public OptionalInt findEmployeeWithMinSalaryFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
                 .mapToInt(Employee::getSalary)
                 .min();
     }
 
-    public static String findEmployeesFromDepartment(int dep) {
+    public String findEmployeesFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
                 .collect( Collectors.toList())
                 .toString();
     }
 
-    public static String findEmployees() {
+    public String findEmployees() {
         return Arrays.stream(employees)
                 .toList().toString();
     }

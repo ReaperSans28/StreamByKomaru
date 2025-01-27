@@ -1,12 +1,12 @@
-package com.komaruStream.StreamByKomaru;
+package com.komaruStream.StreamByKomaru.controller;
 
+import com.komaruStream.StreamByKomaru.service.EmployeeService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 import java.util.OptionalInt;
 
 @RestController
@@ -17,21 +17,21 @@ public class EmployeeController {
 
     @GetMapping("/max-salary")
     public OptionalInt employeeWithMaxSalaryFromDepartment(@PathParam("departmentId") int departmentId) {
-        return EmployeeService.findEmployeeWithMaxSalaryFromDepartment(departmentId);
+        return employeeService.findEmployeeWithMaxSalaryFromDepartment(departmentId);
     }
 
     @GetMapping("/min-salary")
     public OptionalInt employeeWithMinSalaryFromDepartment(@PathParam("departmentId") int departmentId) {
-        return EmployeeService.findEmployeeWithMinSalaryFromDepartment(departmentId);
+        return employeeService.findEmployeeWithMinSalaryFromDepartment(departmentId);
     }
 
     @GetMapping("/all-from-department")
     public String employeeFromDepartment(@PathParam("departmentId") int departmentId) {
-        return EmployeeService.findEmployeesFromDepartment(departmentId);
+        return employeeService.findEmployeesFromDepartment(departmentId);
     }
 
     @GetMapping("/all")
     public String findEmployees() {
-        return EmployeeService.findEmployees();
+        return employeeService.findEmployees();
     }
 }

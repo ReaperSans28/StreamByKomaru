@@ -1,4 +1,4 @@
-package com.komaruStream.StreamByKomaru;
+package com.komaruStream.StreamByKomaru.model;
 
 public class Employee {
     private String name;
