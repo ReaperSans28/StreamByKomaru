@@ -25,12 +25,12 @@ public class EmployeeController {
         return EmployeeService.findEmployeeWithMinSalaryFromDepartment(departmentId);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all-from-department")
     public String employeeFromDepartment(@PathParam("departmentId") int departmentId) {
         return EmployeeService.findEmployeesFromDepartment(departmentId);
     }
 
-    @GetMapping("/alls")
+    @GetMapping("/all")
     public String findEmployees() {
         return EmployeeService.findEmployees();
     }
