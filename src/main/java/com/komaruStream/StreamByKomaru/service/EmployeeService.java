@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
+
 @Service
 public class EmployeeService {
 
@@ -29,18 +30,39 @@ public class EmployeeService {
         return employees;
     }
 
-    public OptionalInt findEmployeeWithMaxSalaryFromDepartment(int dep) {
-        return Arrays.stream(employees)
-                .filter(employee -> employee.getDepartment() == dep)
+    public String findEmployeeWithMaxSalaryFromDepartment(int dep) {
+        OptionalInt maxSalary = Arrays.stream(employees)
+                .filter(employee -> employee.getDepartment() == dep && employee != null)
                 .mapToInt(Employee::getSalary)
                 .max();
+
+        if (maxSalary.isPresent()) {
+            return Arrays.stream(EmployeeService.getEmployees())
+                    .filter(employee -> employee.getDepartment() == dep && employee != null)
+                    .mapToInt(Employee::getSalary)
+                    .max()
+                    .toString();
+        } else {
+            return maxSalary.toString();
+        }
     }
 
-    public OptionalInt findEmployeeWithMinSalaryFromDepartment(int dep) {
-        return Arrays.stream(employees)
-                .filter(employee -> employee.getDepartment() == dep)
+
+    public String findEmployeeWithMinSalaryFromDepartment(int dep) {
+        OptionalInt minSalary = Arrays.stream(employees)
+                .filter(employee -> employee.getDepartment() == dep && employee != null)
                 .mapToInt(Employee::getSalary)
                 .min();
+
+        if (minSalary.isPresent()) {
+            return Arrays.stream(EmployeeService.getEmployees())
+                    .filter(employee -> employee.getDepartment() == dep && employee != null)
+                    .mapToInt(Employee::getSalary)
+                    .min()
+                    .toString();
+        } else {
+            return minSalary.toString();
+        }
     }
 
     public String findEmployeesFromDepartment(int dep) {
