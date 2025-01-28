@@ -16,12 +16,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/max-salary")
-    public OptionalInt employeeWithMaxSalaryFromDepartment(@PathParam("departmentId") int departmentId) {
+    public String employeeWithMaxSalaryFromDepartment(@PathParam("departmentId") int departmentId) {
         return employeeService.findEmployeeWithMaxSalaryFromDepartment(departmentId);
     }
 
     @GetMapping("/min-salary")
-    public OptionalInt employeeWithMinSalaryFromDepartment(@PathParam("departmentId") int departmentId) {
+    public String employeeWithMinSalaryFromDepartment(@PathParam("departmentId") int departmentId) {
         return employeeService.findEmployeeWithMinSalaryFromDepartment(departmentId);
     }
 

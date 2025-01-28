@@ -4,7 +4,6 @@ import com.komaruStream.StreamByKomaru.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,18 +28,20 @@ public class EmployeeService {
         return employees;
     }
 
-    public OptionalInt findEmployeeWithMaxSalaryFromDepartment(int dep) {
+    public String findEmployeeWithMaxSalaryFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
                 .mapToInt(Employee::getSalary)
-                .max();
+                .max()
+                .toString();
     }
 
-    public OptionalInt findEmployeeWithMinSalaryFromDepartment(int dep) {
+    public String findEmployeeWithMinSalaryFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
                 .mapToInt(Employee::getSalary)
-                .min();
+                .min()
+                .toString();
     }
 
     public String findEmployeesFromDepartment(int dep) {
