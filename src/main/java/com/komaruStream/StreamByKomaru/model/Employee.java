@@ -1,7 +1,7 @@
 package com.komaruStream.StreamByKomaru.model;
 
 public class Employee {
-    private String name;
+    private final String name;
     private int department;
     private int salary;
 

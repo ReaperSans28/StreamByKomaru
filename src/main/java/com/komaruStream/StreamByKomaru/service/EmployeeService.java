@@ -4,14 +4,13 @@ import com.komaruStream.StreamByKomaru.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.OptionalInt;
-import java.util.stream.Collectors;
+import java.util.Comparator;
 
 
 @Service
 public class EmployeeService {
 
-    private static Employee[] employees = new Employee[10];
+    private static final Employee[] employees = new Employee[10];
 
     public EmployeeService(Employee[] employee) {
         employees[0] = new Employee("Вонави Нави", 1, 50000);
@@ -30,45 +29,25 @@ public class EmployeeService {
         return employees;
     }
 
-    public String findEmployeeWithMaxSalaryFromDepartment(int dep) {
-        OptionalInt maxSalary = Arrays.stream(employees)
-                .filter(employee -> employee.getDepartment() == dep && employee != null)
-                .mapToInt(Employee::getSalary)
-                .max();
-
-        if (maxSalary.isPresent()) {
-            return Arrays.stream(EmployeeService.getEmployees())
-                    .filter(employee -> employee.getDepartment() == dep && employee != null)
-                    .mapToInt(Employee::getSalary)
-                    .max()
-                    .toString();
-        } else {
-            return maxSalary.toString();
-        }
+    public Employee findEmployeeWithMaxSalaryFromDepartment(int dep) {
+        return Arrays.stream(EmployeeService.getEmployees())
+                .filter(employee -> employee.getDepartment() == dep)
+                .max(Comparator.comparingInt(Employee::getSalary))
+                .orElse(null);
     }
 
 
-    public String findEmployeeWithMinSalaryFromDepartment(int dep) {
-        OptionalInt minSalary = Arrays.stream(employees)
-                .filter(employee -> employee.getDepartment() == dep && employee != null)
-                .mapToInt(Employee::getSalary)
-                .min();
-
-        if (minSalary.isPresent()) {
-            return Arrays.stream(EmployeeService.getEmployees())
-                    .filter(employee -> employee.getDepartment() == dep && employee != null)
-                    .mapToInt(Employee::getSalary)
-                    .min()
-                    .toString();
-        } else {
-            return minSalary.toString();
-        }
+    public Employee findEmployeeWithMinSalaryFromDepartment(int dep) {
+        return Arrays.stream(EmployeeService.getEmployees())
+                .filter(employee -> employee.getDepartment() == dep)
+                .min(Comparator.comparingInt(Employee::getSalary))
+                .orElse(null);
     }
 
     public String findEmployeesFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
-                .collect( Collectors.toList())
+                .toList()
                 .toString();
     }
 
