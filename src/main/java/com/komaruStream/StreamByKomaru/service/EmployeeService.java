@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 
 @Service
@@ -44,15 +45,14 @@ public class EmployeeService {
                 .orElse(null);
     }
 
-    public String findEmployeesFromDepartment(int dep) {
+    public List<Employee> findEmployeesFromDepartment(int dep) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.getDepartment() == dep)
-                .toList()
-                .toString();
+                .toList();
     }
 
-    public String findEmployees() {
+    public List<Employee> findEmployees() {
         return Arrays.stream(employees)
-                .toList().toString();
+                .toList();
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("departments")
 public class EmployeeController {
@@ -25,12 +27,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/all-from-department")
-    public String employeeFromDepartment(@PathParam("departmentId") int departmentId) {
+    public List<Employee> employeeFromDepartment(@PathParam("departmentId") int departmentId) {
         return employeeService.findEmployeesFromDepartment(departmentId);
     }
 
     @GetMapping("/all")
-    public String findEmployees() {
+    public List<Employee> findEmployees() {
         return employeeService.findEmployees();
     }
 }
