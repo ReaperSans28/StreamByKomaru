@@ -13,7 +13,7 @@ public class EmployeeService {
 
     private static final Employee[] employees = new Employee[10];
 
-    public EmployeeService(Employee[] employee) {
+    public EmployeeService() {
         employees[0] = new Employee("Вонави Нави", 1, 50000);
         employees[1] = new Employee("Годжо Сатору", 2, 60000);
         employees[2] = new Employee("Сергей Талант", 3, 55000);
