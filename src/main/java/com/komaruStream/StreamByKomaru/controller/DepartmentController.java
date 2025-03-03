@@ -2,10 +2,10 @@ package com.komaruStream.StreamByKomaru.controller;
 
 import com.komaruStream.StreamByKomaru.model.Employee;
 import com.komaruStream.StreamByKomaru.service.DepartmentService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -14,25 +14,25 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/departments")
 public class DepartmentController {
-    private final DepartmentService departmentServies;
+    private final DepartmentService departmentService;
 
     @Autowired
-    public DepartmentController(DepartmentService departmentServies) {
-        this.departmentServies = departmentServies;
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     @GetMapping(path = "/max-salary")
-    public List<String> findMaxSalary(@PathParam("departmentId") byte departmentId) {
-        return departmentServies.getMaxSalary(departmentId);
+    public List<String> findMaxSalary(@RequestParam("departmentId") byte departmentId) {
+        return departmentService.getMaxSalary(departmentId);
     }
 
     @GetMapping(path = "/min-salary")
-    public List<String> findMinSalary(@PathParam("departmentId") byte departmentId) {
-        return departmentServies.getMinSalary(departmentId);
+    public List<String> findMinSalary(@RequestParam("departmentId") byte departmentId) {
+        return departmentService.getMinSalary(departmentId);
     }
 
     @GetMapping(path = "/all")
-    public Map<Integer, List<Employee>> findAllEmployeeOnDepartament(@PathParam("departmentId") byte departmentId) {
-        return departmentServies.groupEmployeesByDepartment(departmentId);
+    public Map<Integer, List<Employee>> findAllEmployeeOnDepartment(@RequestParam("departmentId") byte departmentId) {
+        return departmentService.groupEmployeesByDepartment(departmentId);
     }
 }

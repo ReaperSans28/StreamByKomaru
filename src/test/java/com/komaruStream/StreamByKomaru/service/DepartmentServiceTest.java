@@ -13,7 +13,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class DepartmentServiceTest {
+public class DepartmentServiceTest {
 
     @InjectMocks
     private DepartmentService departmentService;
