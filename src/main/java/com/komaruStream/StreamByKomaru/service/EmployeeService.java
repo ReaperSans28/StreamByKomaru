@@ -26,12 +26,13 @@ public class EmployeeService {
         employees[9] = new Employee("Неко Арк", 1, 1000000000);
     }
 
-    public static Employee[] getEmployees() {
+    public Employee[] getEmployees() {
         return employees;
     }
 
     public Employee findEmployeeWithMaxSalaryFromDepartment(int dep) {
-        return Arrays.stream(EmployeeService.getEmployees())
+        EmployeeService employeeService = new EmployeeService();
+        return Arrays.stream(employeeService.getEmployees())
                 .filter(employee -> employee.getDepartment() == dep)
                 .max(Comparator.comparingInt(Employee::getSalary))
                 .orElse(null);
@@ -39,7 +40,8 @@ public class EmployeeService {
 
 
     public Employee findEmployeeWithMinSalaryFromDepartment(int dep) {
-        return Arrays.stream(EmployeeService.getEmployees())
+        EmployeeService employeeService = new EmployeeService();
+        return Arrays.stream(employeeService.getEmployees())
                 .filter(employee -> employee.getDepartment() == dep)
                 .min(Comparator.comparingInt(Employee::getSalary))
                 .orElse(null);

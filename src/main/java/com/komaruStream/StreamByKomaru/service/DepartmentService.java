@@ -16,19 +16,19 @@ public class DepartmentService {
     private EmployeeService employeeService;
 
     public Map<Integer, List<Employee>> groupEmployeesByDepartment(byte departmentId) {
-        return Arrays.stream( EmployeeService.getEmployees() )
+        return Arrays.stream( employeeService.getEmployees() )
                 .filter( employee -> employee != null && employee.getDepartment() == departmentId )
                 .collect( Collectors.groupingBy( Employee::getDepartment ) );
     }
 
     public List<String> getMinSalary(byte departmentId) {
-        OptionalInt minSalary = Arrays.stream( EmployeeService.getEmployees() )
+        OptionalInt minSalary = Arrays.stream( employeeService.getEmployees() )
                 .filter( employee -> employee != null && employee.getDepartment() == departmentId )
                 .mapToInt( Employee::getSalary )
                 .min();
 
         if (minSalary.isPresent()) {
-            return Arrays.stream( EmployeeService.getEmployees() )
+            return Arrays.stream( employeeService.getEmployees() )
                     .filter( employee -> employee != null && employee.getDepartment() == departmentId && employee.getSalary() == minSalary.getAsInt() )
                     .map( Employee::toString )
                     .collect( Collectors.toList() );
@@ -38,13 +38,13 @@ public class DepartmentService {
     }
 
     public List<String> getMaxSalary(byte departmentId) {
-        OptionalInt maxSalary = Arrays.stream( EmployeeService.getEmployees() )
+        OptionalInt maxSalary = Arrays.stream( employeeService.getEmployees() )
                 .filter( employee -> employee != null && employee.getDepartment() == departmentId )
                 .mapToInt( Employee::getSalary )
                 .max();
 
         if (maxSalary.isPresent()) {
-            return Arrays.stream( EmployeeService.getEmployees() )
+            return Arrays.stream( employeeService.getEmployees() )
                     .filter( employee -> employee != null && employee.getDepartment() == departmentId && employee.getSalary() == maxSalary.getAsInt() )
                     .map( Employee::toString )
                     .collect( Collectors.toList() );
