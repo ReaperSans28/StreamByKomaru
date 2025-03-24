@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalInt;
 
 @RestController
-@RequestMapping(path = "/departments")
+@RequestMapping("departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -22,12 +23,12 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/max-salary")
-    public List<String> findMaxSalary(@RequestParam("departmentId") byte departmentId) {
+    public OptionalInt findMaxSalary(@RequestParam("departmentId") byte departmentId) {
         return departmentService.getMaxSalary(departmentId);
     }
 
     @GetMapping(path = "/min-salary")
-    public List<String> findMinSalary(@RequestParam("departmentId") byte departmentId) {
+    public OptionalInt findMinSalary(@RequestParam("departmentId") byte departmentId) {
         return departmentService.getMinSalary(departmentId);
     }
 

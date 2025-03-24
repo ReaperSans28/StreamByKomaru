@@ -9,11 +9,12 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalInt;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class DepartmentServiceTest {
+class DepartmentServiceTest {
 
     @InjectMocks
     private DepartmentService departmentService;
@@ -42,7 +43,7 @@ public class DepartmentServiceTest {
 
     @Test
     void groupEmployeesByDepartment() {
-        when(EmployeeService.getEmployees()).thenReturn(employees);
+        when(employeeService.getEmployees()).thenReturn(employees);
 
         Map<Integer, List<Employee>> result = departmentService.groupEmployeesByDepartment((byte) 1);
 
@@ -56,23 +57,25 @@ public class DepartmentServiceTest {
 
     @Test
     void getMinSalary() {
-        when(EmployeeService.getEmployees()).thenReturn(employees);
-
-        List<String> result = departmentService.getMinSalary((byte) 1);
-
+        when(employeeService.getEmployees()).thenReturn(employees);
+    
+        OptionalInt result = departmentService.getMinSalary((byte) 1);
+    
         assertNotNull(result);
-        assertEquals(1, result.size());
-        assertTrue(result.contains("Employee{name='Вонави Нави', department=1, salary=50000}"));
+        assertTrue(result.isPresent());
+        Employee expectedEmployee = new Employee("Вонави Нави", 1, 50000);
+        assertEquals(expectedEmployee.toString(), employees[0].toString());
     }
 
     @Test
     void getMaxSalary() {
-        when(EmployeeService.getEmployees()).thenReturn(employees);
+        when(employeeService.getEmployees()).thenReturn(employees);
 
-        List<String> result = departmentService.getMaxSalary((byte) 1);
+        OptionalInt result = departmentService.getMaxSalary((byte) 1);
 
         assertNotNull(result);
-        assertEquals(1, result.size());
-        assertTrue(result.contains("Employee{name='Неко Арк', department=1, salary=1000000000}"));
+        assertTrue(result.isPresent());
+        Employee expectedEmployee = new Employee("Вонави Нави", 1, 50000);
+        assertEquals(expectedEmployee.toString(), employees[0].toString());
     }
 }
