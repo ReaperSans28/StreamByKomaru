@@ -23,12 +23,12 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/max-salary")
-    public OptionalInt findMaxSalary(@RequestParam("departmentId") byte departmentId) {
+    public int findMaxSalary(@RequestParam("departmentId") byte departmentId) {
         return departmentService.getMaxSalary(departmentId);
     }
 
     @GetMapping(path = "/min-salary")
-    public OptionalInt findMinSalary(@RequestParam("departmentId") byte departmentId) {
+    public int findMinSalary(@RequestParam("departmentId") byte departmentId) {
         return departmentService.getMinSalary(departmentId);
     }
 

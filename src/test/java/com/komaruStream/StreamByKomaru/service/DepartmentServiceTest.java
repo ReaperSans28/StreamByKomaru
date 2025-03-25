@@ -59,23 +59,24 @@ class DepartmentServiceTest {
     void getMinSalary() {
         when(employeeService.getEmployees()).thenReturn(employees);
     
-        OptionalInt result = departmentService.getMinSalary((byte) 1);
+        int result = departmentService.getMinSalary((byte) 1);
     
         assertNotNull(result);
-        assertTrue(result.isPresent());
+        assertEquals(50000, result);
         Employee expectedEmployee = new Employee("Вонави Нави", 1, 50000);
-        assertEquals(expectedEmployee.toString(), employees[0].toString());
+
+        assertEquals(expectedEmployee.getSalary(), result);
     }
 
     @Test
     void getMaxSalary() {
         when(employeeService.getEmployees()).thenReturn(employees);
 
-        OptionalInt result = departmentService.getMaxSalary((byte) 1);
+        int result = departmentService.getMaxSalary((byte) 1);
 
         assertNotNull(result);
-        assertTrue(result.isPresent());
-        Employee expectedEmployee = new Employee("Вонави Нави", 1, 50000);
-        assertEquals(expectedEmployee.toString(), employees[0].toString());
+        assertEquals(1000000000, result);
+        Employee expectedEmployee = new Employee("Неко Арк", 1, 1000000000);
+        assertEquals(expectedEmployee.toString(), employees[9].toString());
     }
 }
