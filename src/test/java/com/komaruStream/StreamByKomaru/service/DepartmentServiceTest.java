@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Map;
-import java.util.OptionalInt;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -63,9 +62,6 @@ class DepartmentServiceTest {
     
         assertNotNull(result);
         assertEquals(50000, result);
-        Employee expectedEmployee = new Employee("Вонави Нави", 1, 50000);
-
-        assertEquals(expectedEmployee.getSalary(), result);
     }
 
     @Test
@@ -76,7 +72,5 @@ class DepartmentServiceTest {
 
         assertNotNull(result);
         assertEquals(1000000000, result);
-        Employee expectedEmployee = new Employee("Неко Арк", 1, 1000000000);
-        assertEquals(expectedEmployee.toString(), employees[9].toString());
     }
 }
